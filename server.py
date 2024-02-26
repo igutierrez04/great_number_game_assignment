@@ -13,7 +13,12 @@ def home():
 
 @app.route('/guess', methods=['POST'])
 def guess():
-    pass
+    if int(request.form['number_guess']) > int(session['random_num']):
+        session['message'] = 'Too high!'
+        return redirect('/')
+    elif int(request.form['number_guess']) < int(session['random_num']):
+        session['message'] = 'Too low!'
+        return redirect('/')
 
 if __name__=='__main__':
     app.run(debug=True)
