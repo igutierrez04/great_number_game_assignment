@@ -9,10 +9,27 @@
 <body>
     <h1>Welcome to the Great Number Game!!!</h1>
     <p>I am thinking of a number between 1 and 100</p>
+    {% if session['count'] == 5 %}
+        <p>You lose try again!</p>
+        <form action="/reset">
+            <button>Guess again!</button>
+        </form>
+    {% elif session['message'] == 'too high!' %}
+        <p>Too high, try again.</p>
+    {% elif session['message'] == 'too low!' %}
+        <p>Too low, try again.</p>
+    {% elif session['message'] == 'correct!' %}
+        <p>Correct!</p>
+        <p>It took you {{ session['count'] }} guess(es) to find the number.</p>
+        <form action="/reset">
+            <button>Guess again!</button>
+        </form>
+    {% endif %}
     <form action="/guess" method="POST">
         <label for="number_guess">Take a guess!!!</label>
         <input type="number" name="number_guess">
         <input type="submit" value="Guess">
     </form>
+
 </body>
 </html>
